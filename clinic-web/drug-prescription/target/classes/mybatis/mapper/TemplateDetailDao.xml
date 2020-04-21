@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wotrd.perscription.dao.TemplateDetailDao">
+    <resultMap id="TemplateDetail" type="com.wotrd.perscription.pojo.Templatedetail">
+        <id property="id" column="id"/>
+        <result property="groupnumber" column="groupnumber"/>
+        <result property="drugid" column="drugid"/>
+        <result property="dosage" column="dosage"/>
+        <result property="usage" column="usage"/>
+        <result property="frequency" column="frequency"/>
+        <result property="day" column="day"/>
+        <result property="gross" column="gross"/>
+        <result property="price" column="price"/>
+        <association property="drug" javaType="com.wotrd.perscription.pojo.Drug">
+            <id property="drugname" column="d_drugname"/>
+        </association>
+    </resultMap>
+    <select id="Templatedetail" resultMap="TemplateDetail">
+        select a.*,d.drugname as  d_drugname from settings.templatedetail a
+        inner join settings.temaplejoin b on b.d_id = a.id
+        inner join settings.template c on c.id = b.t_id
+        inner join drug_administration.drug d on d.id = a.drugid
+        <where>
+            <if test="tempateId!=0 and tempateId!=null and tempateId!=''">
+                and c.id = #{tempateId}
+            </if>
+        </where>
+    </select>
+
+    <insert id="temaplateAdd" parameterType="com.wotrd.perscription.pojo.Templatedetail"
+    useGeneratedKeys="true" keyProperty="id">
+        insert into templatedetail (groupnumber, drugid, dosage, "usage", frequency, "day", gross, price,chufangid)
+        values (#{groupnumber},#{drugid},#{dosage},#{usage},#{frequency},#{day},#{gross},#{price},#{chufangid});
+    </insert>
+</mapper>

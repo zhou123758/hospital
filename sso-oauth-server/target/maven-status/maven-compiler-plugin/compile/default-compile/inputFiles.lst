@@ -1,0 +1,13 @@
+D:\Y2\Y2\clinic\sso-oauth-server\src\main\java\oauth\server\service\UserMapperService.java
+D:\Y2\Y2\clinic\sso-oauth-server\src\main\java\oauth\server\dao\UserMapper.java
+D:\Y2\Y2\clinic\sso-oauth-server\src\main\java\oauth\server\config\WebSecurityConfig.java
+D:\Y2\Y2\clinic\sso-oauth-server\src\main\java\oauth\server\pojo\TbRole.java
+D:\Y2\Y2\clinic\sso-oauth-server\src\main\java\oauth\server\pojo\TbPermission.java
+D:\Y2\Y2\clinic\sso-oauth-server\src\main\java\oauth\server\pojo\TbUser.java
+D:\Y2\Y2\clinic\sso-oauth-server\src\main\java\oauth\server\OauthServer.java
+D:\Y2\Y2\clinic\sso-oauth-server\src\main\java\oauth\server\service\PermissionServiceImpl.java
+D:\Y2\Y2\clinic\sso-oauth-server\src\main\java\oauth\server\config\AuthServerConfig.java
+D:\Y2\Y2\clinic\sso-oauth-server\src\main\java\oauth\server\dao\PermissionMapper.java
+D:\Y2\Y2\clinic\sso-oauth-server\src\main\java\oauth\server\service\UserMapperServiceImpl.java
+D:\Y2\Y2\clinic\sso-oauth-server\src\main\java\oauth\server\service\PermissionService.java
+D:\Y2\Y2\clinic\sso-oauth-server\src\main\java\oauth\server\service\UserDetailsServiceImpl.java

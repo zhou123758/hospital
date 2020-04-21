@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: org.clinic.login.LoginApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.18 s - in org.clinic.login.LoginApplicationTests

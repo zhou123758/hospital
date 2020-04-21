@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/clinic-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/clinic-web/drug-information" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/clinic-web/drug-master-data" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/clinic-web/drug-prescription" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/login" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/oauth-login-demo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pojo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sso-oauth-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sso-oauth-resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sso-oauth-server" charset="UTF-8" />
+  </component>
+</project>

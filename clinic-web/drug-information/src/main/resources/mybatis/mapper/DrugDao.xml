@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wotrd.clinic.dao.DrugDao">
+    <resultMap id="drug" type="com.wotrd.clinic.pojo.Drug">
+        <id property="id" column="id"/>
+        <result property="drugcoding" column="drugcoding"/>
+        <result property="drugname" column="drugname"/>
+        <result property="specification" column="specification"/>
+        <result property="purchaseprice" column="purchaseprice"/>
+        <result property="drugprice" column="drugprice"/>
+        <result property="repertory" column="repertory"/>
+        <association property="chargetype" javaType="com.wotrd.clinic.pojo.Chargetype">
+            <id property="id" column="c_id"/>
+            <result property="chargetype" column="c_chargetype"/>
+        </association>
+        <association property="drugstatus" javaType="com.wotrd.clinic.pojo.Drugstatus">
+            <id property="id" column="s_id"/>
+            <result property="status" column="s_status"/>
+        </association>
+        <association property="jtype" javaType="com.wotrd.clinic.pojo.Jtype">
+            <id property="id" column="j_id"/>
+            <result property="jtype" column="j_type"/>
+        </association>
+        <association property="xtype" javaType="com.wotrd.clinic.pojo.Xtype">
+            <id property="id" column="x_id"/>
+            <result property="xtype" column="x_type"/>
+        </association>
+        <association property="ztype" javaType="com.wotrd.clinic.pojo.Ztype">
+            <id property="id" column="z_id"/>
+            <result property="ztype" column="z_type"/>
+        </association>
+    </resultMap>
+    
+    <select id="quertDrugPage" resultMap="drug">
+        select a.*,
+        c.id as c_id,c.chargetype as c_chargetype,
+        d.id as s_id,d.status as s_status,j.id as j_id,
+        j.jtype as j_type,x.id as x_id,x.xtype as x_type,
+        z.id as z_id,z.ztype as z_type
+        from drug a
+        inner join chargetype c on a.chargeType = c.id
+        inner join drugstatus d on a.status = d.id
+        inner join jtype j on a.type = j.id
+        inner join xtype x on a.type = x.id
+        inner join ztype z on a.type = z.id
+        <where>
+            c.`id` = 1 OR c.`id` = 2
+            <if test="chargetType!=0">
+                and c.id = #{chargettypeid}
+            </if>
+            <if test="drugstatus!=0">
+                and d.id = #{drugstatusid}
+            </if>
+            <if test="creationtime!=null and creationtime!=''">
+                and a.creationtime = ${creationtime}
+            </if>
+            <if test="drugnameordrugnoorvender!=null and drugnameordrugnoorvender!=''">
+                and a.drugname like CONCAT('%',#{drugnameordrugnoorvender},'%')
+                or a.drugcoding like CONCAT('%',#{drugnameordrugnoorvender},'%')
+                or a.vendername like CONCAT('%',#{drugnameordrugnoorvender},'%')
+            </if>
+        </where>
+        limit #{from},#{pageSize}
+    </select>
+    <select id="quertDrugCount" resultType="int">
+        select count(a.id)
+        from drug a
+        inner join chargetype c on a.chargeType = c.id
+        inner join drugstatus d on a.status = d.id
+        inner join jtype j on a.type = j.id
+        inner join xtype x on a.type = x.id
+        inner join ztype z on a.type = z.id
+        <where>
+            c.`id` = 1 OR c.`id` = 2
+            <if test="chargetType!=0">
+                and c.id = #{chargettypeid}
+            </if>
+            <if test="drugstatus!=0">
+                and d.id = #{drugstatusid}
+            </if>
+            <if test="creationtime!=null and creationtime!=''">
+                and a.creationtime = ${creationtime}
+            </if>
+            <if test="drugnameordrugnoorvender!=null and drugnameordrugnoorvender!=''">
+                and a.drugname like CONCAT('%',#{drugnameordrugnoorvender},'%')
+                or a.drugcoding like CONCAT('%',#{drugnameordrugnoorvender},'%')
+                or a.vendername like CONCAT('%',#{drugnameordrugnoorvender},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

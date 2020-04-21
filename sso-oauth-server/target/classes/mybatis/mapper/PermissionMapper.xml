@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="oauth.server.dao.PermissionMapper">
+    <select id="getByUserid" resultType="oauth.server.pojo.TbPermission">
+        select a.* from tb_permission a
+        inner join tb_role_permission b on a.id = b.permission_id
+        inner join tb_role c on c.id = b.role_id
+        inner join tb_user_role d on d.role_id = c.id
+        inner join tb_user e on e.id = d.user_id
+        where d.user_id = #{uid}
+    </select>
+</mapper>

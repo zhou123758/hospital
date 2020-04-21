@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wotrd.data.dao.StaffDao">
+    <resultMap id="staff" type="com.wotrd.data.pojo.Staff">
+        <id property="id" column="id"/>
+        <result property="staffno" column="staffno"/>
+        <result property="staffname" column="staffname"/>
+        <result property="age" column="age"/>
+        <result property="gender" column="gender"/>
+        <result property="phone" column="phone"/>
+        <result property="clinicId" column="clinicId"/>
+        <result property="departmentsid" column="departmentsid"/>
+        <result property="roleId" column="roleId"/>
+        <result property="creationtime" column="creationtime"/>
+        <result property="creation" column="creation"/>
+        <result property="statu" column="statu"/>
+        <association property="clinic" javaType="com.wotrd.data.pojo.Clinic">
+            <id property="id" column="c_id"/>
+            <result property="clinicname" column="c_clinicname"/>
+        </association>
+        <association property="departments" javaType="com.wotrd.data.pojo.Departments">
+            <id property="id" column="d_id"/>
+            <result property="departments" column="d_departments"/>
+        </association>
+        <association property="staffRole" javaType="com.wotrd.data.pojo.StaffRole">
+            <id property="id" column="r_id"/>
+            <result property="role" column="r_role"/>
+        </association>
+    </resultMap>
+
+    <select id="queryStaffParamPage" resultMap="staff">
+        select a.*,c.id as c_id,c.clinicname as c_clinicname,
+        d.id as d_id,d.departments as d_departments,s.id as s_id,
+        s.role as s_role
+        from staff a
+        inner join clinic c on a.clinicId = c.id
+        inner join departments d on a.departmentsid = d.id
+        inner join staff_role s on a.roleId = s.id
+        <where>
+            <if test="departmentsid!=0 and departmentsid!=null and departmentsid!=''">
+                and a.departmentsid =  #{departmentsid}
+            </if>
+            <if test="staffName!=null and staffName!=''">
+                and a.staffname like CONCAT('%',#{staffName},'%')
+            </if>
+        </where>
+        limit #{from},#{pageSize}
+    </select>
+
+    <select id="queryStaffParamCount" resultType="int">
+        select count(*)
+        from staff a
+        inner join clinic c on a.clinicId = c.id
+        inner join departments d on a.departmentsid = d.id
+        inner join staff_role s on a.roleId = s.id
+        <where>
+            <if test="departmentsid!=0">
+                and a.departmentsid =  #{departmentsid}
+            </if>
+            <if test="staffName!=null and staffName!=''">
+                and a.staffname like CONCAT('%',#{staffName},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

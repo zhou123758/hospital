@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="sso-oauth-resources" />
+        <module name="login" />
+        <module name="pojo" />
+        <module name="sso-oauth-server" />
+        <module name="drug-information" />
+        <module name="sso-oauth-client" />
+        <module name="oauth-login-demo" />
+        <module name="drug-master-data" />
+        <module name="drug-prescription" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="common" target="1.8" />
+      <module name="medicine" target="1.8" />
+      <module name="pretemplate" target="1.8" />
+      <module name="settings" target="1.8" />
+      <module name="sso-oauth-client2" target="1.8" />
+      <module name="sso-oauth-client2 (1)" target="1.8" />
+      <module name="user" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="clinic-web" options="-parameters" />
+      <module name="drug-information" options="-parameters" />
+      <module name="drug-master-data" options="-parameters" />
+      <module name="drug-prescription" options="-parameters" />
+      <module name="login" options="-parameters" />
+      <module name="oauth-login-demo" options="-parameters" />
+      <module name="pojo" options="-parameters" />
+      <module name="settings" options="-parameters" />
+      <module name="sso-oauth-client" options="-parameters" />
+      <module name="sso-oauth-client2 (1)" options="-parameters" />
+      <module name="sso-oauth-resources" options="-parameters" />
+      <module name="sso-oauth-server" options="-parameters" />
+    </option>
+  </component>
+</project>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wotrd.perscription.dao.TemplateDao">
+    <resultMap id="Template" type="com.wotrd.perscription.pojo.Template">
+        <id property="id" column="id"/>
+        <result property="templateId" column="templateId"/>
+        <result property="name" column="name"/>
+        <result property="prescriptionType" column="prescriptionType"/>
+        <result property="diagnose" column="diagnose"/>
+        <result property="permission" column="permission"/>
+        <result property="creationTime" column="creationTime"/>
+        <result property="creater" column="creater"/>
+        <association property="prescriptiontypeObj" javaType="com.wotrd.perscription.pojo.Prescriptiontype">
+            <id property="prescriptionId" column="b_prescriptionId"/>
+            <result property="prescriptionName" column="b_prescriptionName"/>
+        </association>
+        <association property="permissionObj" javaType="com.wotrd.perscription.pojo.Permission">
+            <id property="permissionId" column="c_permissionId"/>
+            <result property="permissionName" column="c_permissionName"/>
+        </association>
+    </resultMap>
+    <select id="queryTemplatePage" resultMap="Template">
+        select a.*,b.prescriptionId as b_prescriptionId,b.prescriptionName as b_prescriptionName,
+        c.permissionId as c_permissionId
+        from  template a
+        inner join prescriptiontype b on a.prescriptionType = b.prescriptionId
+        inner join permission c on a.permission = c.permissionId
+        <where>
+            <if test="prescriptionId!=0">
+                and b.prescriptionId = #{prescriptionId}
+            </if>
+            <if test="permissionId!=0">
+                and c.permissionId = #{permissionId}
+            </if>
+            <if test="tempNameORtempId!=null and tempNameORtempId!=''">
+                and a.name like CONCAT('%',#{tempNameORtempId},'%')
+                or a.templateId like CONCAT('%',#{tempNameORtempId},'%')
+            </if>
+        </where>
+    </select>
+
+    <insert id="templateAdd">
+        insert into tidjoinnid (nid, tid) values (#{nid},#{tid});
+    </insert>
+</mapper>

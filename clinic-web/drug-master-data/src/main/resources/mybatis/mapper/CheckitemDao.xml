@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wotrd.data.dao.CheckitemDao">
+    <resultMap id="Checkitem" type="com.wotrd.data.pojo.Checkitem">
+        <id property="id" column="id"/>
+        <result property="checkitemno" column="checkitemno"/>
+        <result property="checkitemname" column="checkitemname"/>
+        <result property="checkitemtype" column="checkitemtype"/>
+        <result property="invoiceitems" column="invoiceitems"/>
+        <result property="price" column="price"/>
+        <result property="cost" column="cost"/>
+        <result property="unit" column="unit"/>
+        <result property="status" column="status"/>
+        <result property="creationtime" column="creationtime"/>
+        <association property="checkitemtypeObj" javaType="com.wotrd.data.pojo.Checkitemtype">
+            <id property="id" column="c_id"/>
+            <result property="checkitemtype" column="c_checkitemtype"/>
+        </association>
+        <association property="additionalfees" javaType="com.wotrd.data.pojo.Additionalfees">
+            <id property="id" column="i_id"/>
+            <result property="additionalfees" column="i_additionalfees"/>
+        </association>
+        <association property="checkitemtstatus" javaType="com.wotrd.data.pojo.Checkitemtstatus">
+            <id property="id" column="v_id"/>
+            <result property="status" column="v_status"/>
+        </association>
+    </resultMap>
+
+    <select id="queryCheckitemParamPage" resultMap="Checkitem">
+        select a.*,c.id as c_id,c.checkitemtype as c_checkitemtype,
+        i.id as i_id,i.additionalfees as i_additionalfees,
+        v.id as v_id,v.status as v_status
+         from checkitem a
+        inner join checkitemtype c on a.checkitemtype = c.id
+        inner join additionalfees i on a.invoiceitems = i.id
+        inner join checkitemtstatus v on a.status = v.id
+        <where>
+            <if test="checkitemtstatus!=0 and checkitemtstatus!=null and checkitemtstatus!='' and checkitemtstatus!='null'">
+                and v.id = #{checkitemtstatus}
+            </if>
+            <if test="checkitemnameORcheckitemno!=null and checkitemnameORcheckitemno!='' and checkitemnameORcheckitemno!='null'">
+                and a.checkitemname like CONCAT('%',#{checkitemnameORcheckitemno},'%')
+                or a.checkitemno like CONCAT('%',#{checkitemnameORcheckitemno},'%')
+            </if>
+        </where>
+    </select>
+    
+    <insert id="checkitemAdd">
+        insert into pidjoincid (pid, cid,num,price) values (#{pid},#{cid});
+    </insert>
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wotrd.data.dao.PatientDao">
+    <resultMap id="Patient" type="com.wotrd.data.pojo.Patient">
+        <id property="id" column="id"/>
+        <result property="patientno" column="patientno"/>
+        <result property="patientname" column="patientname"/>
+        <result property="sex" column="sex"/>
+        <result property="age" column="age"/>
+        <result property="phone" column="phone"/>
+        <result property="viplevel" column="viplevel"/>
+        <result property="creationtime" column="creationtime"/>
+        <result property="operator" column="operator"/>
+        <association property="viplevelObj" javaType="com.wotrd.data.pojo.Viplevel">
+            <id property="id" column="v_id"/>
+            <result property="viplevel" column="v_viplevel"/>
+        </association>
+    </resultMap>
+
+    <select id="queryPatientParamPage" resultMap="Patient">
+        select a.*,v.id as v_id,v.viplevel as v_viplevel from patient a
+        inner join viplevel v on a.viplevel = v.id
+        <where>
+            <if test="viplevel!=0 and viplevel!=null and viplevel!=''">
+                and a.viplevel = #{viplevel}
+            </if>
+            <if test="creationtime!=null and creationtime!=''">
+                and a.creationtime like CONCAT('%',#{creationtime},'%')
+            </if>
+            <if test="patientnameORphone!=null and patientnameORphone!=''">
+                and a.patientname like CONCAT('%',#{patientnameORphone},'%')
+                or a.phone like CONCAT('%',#{patientnameORphone},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

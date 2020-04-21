@@ -1,0 +1,10 @@
+server:
+  port: 9005
+
+spring:
+  application:
+    name: sso-client
+    
+localhost: http://localhost:9001
+  
+  

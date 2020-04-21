@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wotrd.data.dao.AdditionalfeesDao">
+    <select id="getAdditionalfeesAll" resultType="com.wotrd.data.pojo.Additionalfees">
+        select * from additionalfees
+    </select>
+
+    <insert id="additionalfeesSave">
+        insert into additionalfessjoin (nid, aid,num,price) values (#{nid},#{aid},#{num},#{price});
+    </insert>
+</mapper>
